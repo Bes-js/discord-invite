@@ -1,97 +1,103 @@
-<h6 align="center">
-<img src="https://github.com/Bes-js/discord-invite/blob/main/discord-invite-logo.png?raw=true" width="620px" height="160px" alt="stats" align="center">
-<h6/>
+<p align="center"> <a href="#"> <img width=500 src="https://github.com/Bes-js/discord-invite/blob/main/discord-invite-logo.png?raw=true"></a></p> 
+<p align="center"><a href="https://nodei.co/npm/discord-invite/"><img src="https://nodei.co/npm/discord-invite.png"></a></p>
+<p align="center"><img src="https://img.shields.io/npm/v/discord-invite?style=for-the-badge"> <img src="https://img.shields.io/github/repo-size/Bes-js/discord-invite?style=for-the-badge"> <img src="https://img.shields.io/npm/l/discord-invite?style=for-the-badge"> <img src="https://img.shields.io/npm/dt/discord-invite?style=for-the-badge"> <img src="https://img.shields.io/github/contributors/Bes-js/discord-invite?style=for-the-badge"> <img src="https://img.shields.io/github/package-json/dependency-version/Bes-js/discord-invite/@discordjs/collection?style=for-the-badge"> <a href="https://discord.gg/luppux" target="_blank"> <img src="https://img.shields.io/github/package-json/dependency-version/Bes-js/discord-invite/five.d?style=for-the-badge"> <a href="https://discord.gg/luppux" target="_blank"> <img alt="Discord" src="https://img.shields.io/badge/Support-Click%20here-7289d9?style=for-the-badge&logo=discord"> </a></p>
 
-<a href="https://www.buymeacoffee.com/beykant" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="120px" height="30px" alt="Buy Me A Coffee"></a>
+# [discord-invite](https://discord.gg/luppux)
 
-![npm version](https://img.shields.io/npm/v/moviex?color=blue&label=npm%20i%20discord-invite&logo=npm&style=flat)
-![npm info](https://img.shields.io/npm/dw/discord-invite?color=blue)
+> **Track the invites in your servers to know who invited who and with which invite!**
 
+#
+### ❔ [Support](https://discord.gg/luppux)
+### 📂 [NPM](https://npmjs.com/discord-invite)
+### 📝 [Github](https://github.com/Bes-js/discord-invite)
 
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=FF0000&repeat=false&width=435&lines=%E2%9D%94+How+To+Install%3F)](#)
+#
+# Installation
 
-To Install the `discord-invite` module, open a console and write the code below.
-<br> </br>
-For **npm**
-```console
+```bash
 npm i discord-invite
 ```
-
-For **Yarn**
-```console
-yarn add discord-invite
-```
-
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=00EDFF&repeat=false&width=435&lines=%F0%9F%8E%AF+Describing)](#)
-
-For **CommonJS**
-```javascript
-const { InviteTracker } = require("discord-invite");
-InviteTracker(client);
-```
-
-For **ES6**
-```javascript
-import { InviteTracker } from "discord-invite";
-InviteTracker(client);
-```
-
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=blue&repeat=false&width=435&lines=✨+Events+&+Usage)](#)
-
-```javascript
-// Guild Member Join Event
-client.on("memberJoin",async(member,inviter,invite) => { })
-
-// Guild Member Leave Event
-client.on("memberLeave",async(member,inviter,invite) => { })
-```
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=blue&repeat=false&width=435&lines=🪄+Example+Codes)](#)
+#
+# Quick Example
+ 
+**Example For CommonJS**
 ```js
-const { Client } = require("discord.js")
-const client = new Client({intents: Object.keys(GatewayIntentBits),partials:Object.keys(Partials)});
-
-const { InviteTracker } = require("discord-invite");
-InviteTracker(client);
-
-// Join Event
-client.on("memberJoin",async(member,inviter,invite) => { 
-if(inviter == null){
-console.log(`${member.user.tag} joined the server, but I couldn't find out who was invited.`)
-}else
-if(member.id == inviter.id){
-console.log(`${member.user.tag} Joined the server by his own invitation!`)
-}else
-if(member.guild.vanityURLCode == inviter){
-console.log(`${member.user.tag} Joined Server Using Vanity URL!`)
-}else
-{
-console.log(`${member.user.tag} Joined the server! inviter ${inviter.tag}`)
-}
-})
-
-
-// Leave Event
-client.on("memberLeave",async(member,inviter,invite) => { 
-if(inviter == null){
-console.log(`${member.user.tag} Lefted the server, but I couldn't find out who was invited.`)
-}else
-if(member.id == inviter.id){
-console.log(`${member.user.tag} Lefted the server by his own invitation!`)
-}else
-if(member.guild.vanityURLCode == inviter){
-console.log(`${member.user.tag} Lefted Server Using Vanity URL!`)
-}else
-{
-console.log(`${member.user.tag} Lefted the server! inviter ${inviter.tag}`)
-}
-})
+/* Importing The Package */
+const InviteManager = require('discord-invite');
+const invClient = new InviteManager(client); // client = Discord.Client();
 
 ```
+#
+**Events**
+```js
+/* Guild Member Join Event */
+client.on("memberJoin",async(member,inviter,invite) => { });
+
+/* Guild Member Leave Event */
+client.on("memberLeave",async(member,inviter,invite) => { });
+```
+#
+**Functions**
+```js
+const InviteManager = require('discord-invite');
+const { Client } = require("discord.js");
+const invClient = new InviteManager(client);
+
+invClient.inviteAdd(guildId, user); /* <null> */
+invClient.inviteRemove(guildId, user); /* <null> */
+invClient.getMemberInvites(guildId, user); /* <Object> */
+invClient.getGuildInvites(guildId, limit); /* <Array> - limit = min 1 / max 50 / default 10 */
+```
+#
+**Example Usage;**
+```js
+const InviteManager = require('discord-invite');
+const { Client } = require("discord.js");
+const invClient = new InviteManager(client); // client = Discord.Client();
 
 
-<br> <br/>
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=9D06E6&repeat=false&width=435&lines=API+Token+%26+Support+%26+Donate)](#)
+/* Join Event */
+
+client.on("memberJoin", async function(member, inviter, invite) {
+if(!inviter) {
+  console.log(`${member.user.username} joined the server, but I couldn't find out who was invited.`);
+} else if(member.id == inviter.id) {
+  console.log(`${member.user.username} Joined the server by his own invitation!`);
+}else if(member.guild.vanityURLCode == inviter) {
+  console.log(`${member.user.username} Joined Server Using Vanity URL!`);
+} else {
+  invClient.inviteAdd(member.guild.id, inviter);
+  console.log(`${member.user.tag} Joined the server! inviter ${inviter.username}`);
+};
+});
+
+/* Leave Event */
+
+client.on("memberLeave",async(member,inviter,invite) => { 
+if(!inviter) {
+ console.log(`${member.user.tag} Lefted the server, but I couldn't find out who was invited.`);
+} else if(member.id == inviter.id) {
+ console.log(`${member.user.tag} Lefted the server by his own invitation!`);
+} else if(member.guild.vanityURLCode == inviter) {
+ console.log(`${member.user.tag} Lefted Server Using Vanity URL!`);
+} else {
+ invClient.inviteRemove(member.guild.id, inviter);
+ console.log(`${member.user.tag} Lefted the server! inviter ${inviter.tag}`);
+};
+});
+
+
+client.login("your secret bot token 👻")
+```
+**[discord-invite](https://discord.gg/luppux) Also Supports TypeScript And EsModule 🥳!**
+
+#
+# Credits
+ 
+**Made by [FiveSoBes](https://github.com/Bes-js), [Relivent](https://github.com/Relivent) And [Luppux Development](https://github.com/Luppux)**
+
+
+# Contact & Support & Donate
+<a href="https://www.buymeacoffee.com/beykant" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="120px" height="30px" alt="Buy Me A Coffee"></a>
 
 [![Discord Banner](https://api.weblutions.com/discord/invite/luppux/)](https://discord.gg/luppux)
-<br> </br>
-<a href="https://www.buymeacoffee.com/beykant" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="120px" height="30px" alt="Buy Me A Coffee"></a>
