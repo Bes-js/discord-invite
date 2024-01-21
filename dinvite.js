@@ -19,7 +19,11 @@ constructor(client) {
 const invites = client.invites = new Collection();
 client.on("ready", async () => {
     let collect = new Collection();
+    
     client.guilds.cache.forEach(async (guild) => {
+          if(!guild.members.me.permissions.has("ManageGuild")) {
+     console.log("I didn't have permission in following Guild To Setup Invite System" + `${guild.name} : ${guild.id}`)
+}
         guild.invites.fetch().then((bes) => {
             bes.map((x) => { collect.set(x.code, { uses: x.uses, inviter: x.inviter, code: x.code, guildID: guild.id }) });
             client.invites.set(guild.id, collect);
