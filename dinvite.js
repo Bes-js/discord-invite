@@ -23,6 +23,7 @@ client.on("ready", async () => {
     client.guilds.cache.forEach(async (guild) => {
           if(!guild.members.me.permissions.has("ManageGuild")) {
      console.log("I didn't have permission in following Guild To Setup Invite System" + `${guild.name} : ${guild.id}`)
+              return;
 }
         guild.invites.fetch().then((bes) => {
             bes.map((x) => { collect.set(x.code, { uses: x.uses, inviter: x.inviter, code: x.code, guildID: guild.id }) });
