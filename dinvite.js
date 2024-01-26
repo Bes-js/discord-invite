@@ -53,7 +53,9 @@ client.on("inviteDelete", async (invite) => {
 client.on("guildMemberAdd", async (member) => {
     const fetchInvites = client.invites.get(member.guild.id) || new Collection();
     if(!guild.members.me.permissions.has("ManageGuild")) {
-     console.log("I didn't have permission in following Guild To Setup Invite System" + `${member.guild.name} : ${member.guild.id}`) return;}
+     console.log("I didn't have permission in following Guild To Setup Invite System" + `${member.guild.name} : ${member.guild.id}`);
+     
+     return;}
     const invites = await member.guild.invites.fetch();
     const invite = invites.find((bes) => fetchInvites.has(bes.code) && bes.uses > fetchInvites.get(bes.code).uses) || fetchInvites.find((bes) => !invites.has(bes.code)) || member.guild.vanityURLCode;
     var vanityURL = await member.guild.fetchVanityData().catch(err=>{ vanityURL = "Server Not Level 3 Or I Don't Have Manage Guild Privileges"});
