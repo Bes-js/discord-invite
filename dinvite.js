@@ -52,7 +52,7 @@ client.on("inviteDelete", async (invite) => {
 })
 client.on("guildMemberAdd", async (member) => {
     const fetchInvites = client.invites.get(member.guild.id) || new Collection();
-    if(!guild.members.me.permissions.has("ManageGuild")) {
+    if(!member.guild.members.me.permissions.has("ManageGuild")) {
      console.log("I didn't have permission in following Guild To Setup Invite System" + `${member.guild.name} : ${member.guild.id}`);
      
      return;}
